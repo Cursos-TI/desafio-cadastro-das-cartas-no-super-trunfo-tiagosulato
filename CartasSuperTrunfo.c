@@ -9,14 +9,20 @@
 int main() {
     // Sugestão: Defina variáveis separadas para cada atributo da cidade.
     
-    int populacao1, pontos_turisticos1, populacao2, pontos_turisticos2;
+    int  pontos_turisticos1, pontos_turisticos2;
+    int comp_pontosTuristicos, compPibpercapita, comp_populacao;
+    int compArea, compPib, compSuperpoder, compDensidade;
+    unsigned long int populacao1, populacao2;
+
     char estado1, estado2;
-    float area1, pib1, area2, pib2; 
-    float densid_populacional1, pib_percapita1, densid_populacional2, pib_percapita2;
     char codcarta1[50];
     char nomecidade1[50];
     char codcarta2[50];
     char nomecidade2[50];
+
+    float area1, pib1, area2, pib2, superpoder1, superpoder2; 
+    float densid_populacional1, pib_percapita1, densid_populacional2, pib_percapita2;
+   
 
     // Cadastro das Cartas:
     
@@ -32,7 +38,7 @@ int main() {
     scanf(" %s", &nomecidade1);
 
     printf ("Digite a população da cidade \n");
-    scanf(" %i", &populacao1);
+    scanf(" %lu", &populacao1);
 
     printf ("Digite a area da cidade em Km² \n");
     scanf("      %f", &area1);
@@ -58,7 +64,7 @@ int main() {
     scanf(" %s", &nomecidade2);
 
     printf ("Digite a população da cidade \n");
-    scanf(" %i", &populacao2);
+    scanf(" %lu", &populacao2);
 
     printf ("Digite a area da cidade em Km² \n");
     scanf(" %f", &area2);
@@ -76,6 +82,19 @@ int main() {
     pib_percapita1 = pib1 / populacao1;
     pib_percapita2 = pib2 / populacao2;
 
+    //calculando super poder e comparando as cartas
+
+    superpoder1 = populacao1 + area1 + pib1 + pontos_turisticos1 + pib_percapita1 + (1/densid_populacional1);
+    superpoder2 = populacao2 + area2 + pib2 + pontos_turisticos2 + pib_percapita2 + (1/densid_populacional2);
+
+    comp_populacao = populacao1 > populacao2;
+    compArea = area1 > area2;
+    compPib =  pib1 > pib2;
+    compSuperpoder = superpoder1 > superpoder2;
+    compDensidade = densid_populacional1 > densid_populacional2; 
+    compPibpercapita = pib_percapita1 > pib_percapita2;
+    comp_pontosTuristicos = pontos_turisticos1 > pontos_turisticos2;
+
     // Exibição dos Dados das Cartas:
     // saída de dados carta 1
     
@@ -87,7 +106,7 @@ int main() {
  
      printf ("Nome da Cidade: %s \n", nomecidade1);
  
-     printf ("População: %i \n", populacao1);
+     printf ("População: %lu \n", populacao1);
  
      printf ("Area: %.2f Km²\n", area1);
  
@@ -95,9 +114,11 @@ int main() {
  
      printf ("Pontos Turisticos: %i \n", pontos_turisticos1);
 
-     printf ("Densidade Populacional: %2.f hab/km² \n", densid_populacional1);
+     printf ("Densidade Populacional: %.2f hab/km² \n", densid_populacional1);
 
-     printf ("PIB per Capita: %2.f Reais \n \n", pib_percapita1);
+     printf ("PIB per Capita: %.2f Reais \n ", pib_percapita1);
+
+     printf ("Super Poder: %.2f \n \n",superpoder1);
  
      // Saída de dados carta 2
      printf ("Carta 2 \n");
@@ -108,7 +129,7 @@ int main() {
  
      printf ("Nome da Cidade: %s \n", nomecidade2);
  
-     printf ("População: %i \n", populacao2);
+     printf ("População: %lu \n", populacao2);
  
      printf ("Area: %.2f Km²\n", area2);
  
@@ -116,9 +137,29 @@ int main() {
  
      printf ("Pontos Turisticos: %i \n", pontos_turisticos2);
 
-     printf ("Densidade Populacional: %2.f hab/km² \n", densid_populacional2);
+     printf ("Densidade Populacional: %.2f hab/km² \n", densid_populacional2);
 
-     printf ("PIB per Capita: %2.f Reais \n \n", pib_percapita2);
+     printf ("PIB per Capita: %.2f Reais \n ", pib_percapita2);
+
+     printf ("Super Poder: %.2f \n \n", superpoder2);
+
+     //Saída de Dados do vencedor
+     printf ("Vamos ver o vencedor agora\n\n");
+
+     printf ("População (Carta 1 vence se o resultado for 1): %i \n ",comp_populacao);
+
+     printf ("Area (Carta 1 vence se o resultado for 1): %i \n ",compArea);
+
+     printf ("PIB (Carta 1 vence se o resultado for 1): %i \n ",compPib);
+
+     printf ("Pontos turisticos (Carta 1 vence se o resultado for 1): %i \n ",comp_pontosTuristicos);
+
+     printf ("Densidade Populacional (Carta 1 vence se o resulatdo for 0): %i \n",compDensidade);
+
+     printf ("PIB per Capita (Carta 1 vence se o resultado for 1): %i \n ",compPibpercapita);
+
+     printf ("Super poder (Carta 1 vence se o resultado for 1): %i \n ",compSuperpoder);
+
 
     return 0;
 }
